@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Chat</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+.chat{
+    width:380px;
+    height:650px;
+    background:#151515;
+    border-radius:20px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+}
+
+
+.header{
+    padding:15px;
+    background:#202020;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+
+.pfp{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#555;
+}
+
+
+.online{
+    color:#44ff44;
+    font-size:13px;
+}
+
+
+.messages{
+    flex:1;
+    padding:15px;
+    overflow:auto;
+}
+
+
+.msg{
+    background:#292929;
+    padding:10px;
+    border-radius:15px;
+    margin:8px 0;
+    width:max-content;
+}
+
+
+.seen{
+    font-size:11px;
+    color:#aaa;
+}
+
+
+.input{
+    display:flex;
+    padding:10px;
+    background:#202020;
+}
+
+
+input{
+    flex:1;
+    padding:12px;
+    border-radius:20px;
+    border:none;
+    outline:none;
+}
+
+
+button{
+    margin-left:8px;
+    border:none;
+    border-radius:50%;
+    width:45px;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="chat">
+
+
+<div class="header">
+
+<div class="pfp"></div>
+
+<div>
+<b>User</b>
+<br>
+<span class="online">
+● Online
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="messages" id="messages">
+
+<div class="msg">
+Hello 👋
+<br>
+<span class="seen">
+Seen
+</span>
+</div>
+
+
+</div>
+
+
+
+
+<div class="input">
+
+<input id="text" placeholder="Message...">
+
+<button onclick="send()">
+➤
+</button>
+
+</div>
+
+
+
+</div>
+
+
+
+<script>
+
+
+function send(){
+
+let box=document.getElementById("text");
+
+if(box.value!=""){
+
+let msg=document.createElement("div");
+
+msg.className="msg";
+
+msg.innerHTML=
+box.value+
+"<br><span class='seen'>Sent</span>";
+
+document.getElementById("messages")
+.appendChild(msg);
+
+
+box.value="";
+
+}
+
+}
+
+
+</script>
+
+
+</body>
+</html>
