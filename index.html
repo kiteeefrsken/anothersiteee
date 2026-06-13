@@ -7,6 +7,8 @@
 <title>My Chat</title>
 
 <style>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
 
 *{
     box-sizing:border-box;
@@ -165,24 +167,30 @@ Seen
 
 
 <script>
+    const firebaseConfig = {
+  apiKey: "AIzaSyBNlk6axAHzhTrBzb7XhBFSj7SHjvBBvS8",
+  authDomain: "mysite-460da.firebaseapp.com",
+  projectId: "mysite-460da",
+  storageBucket: "mysite-460da.firebasestorage.app",
+  messagingSenderId: "105238580978",
+  appId: "1:105238580978:web:aad04b0c9d7f8d6dba8a6b",
+  measurementId: "G-V6M7NJXY5D"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 
 function send(){
 
-let box=document.getElementById("text");
+let box = document.getElementById("text");
 
-if(box.value!=""){
+  if (box.value != "") {
 
-let msg=document.createElement("div");
-
-msg.className="msg";
-
-msg.innerHTML=
-box.value+
-"<br><span class='seen'>Sent</span>";
-
-document.getElementById("messages")
-.appendChild(msg);
+    db.ref("messages").push({
+      text: box.value
+    });
 
 
 box.value="";
@@ -190,9 +198,21 @@ box.value="";
 }
 
 }
+    db.ref("messages").on("child_added", function(snapshot) {
+
+  let data = snapshot.val();
+
+  let msg = document.createElement("div");
+  msg.className = "msg";
+  msg.innerHTML = data.text;
+
+  document.getElementById("messages").appendChild(msg);
+
+});
 
 
 </script>
+    
 
 
 </body>
